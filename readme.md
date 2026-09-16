@@ -142,8 +142,7 @@ Every verdict returns a consistent, machine-readable payload:
 
 | Resource | URL |
 | :--- | :--- |
-| **Agent Integration Guide** | `https://backendai-x4m1.onrender.com/agent-docs.html` |
-| **API Reference** | `https://backendai-x4m1.onrender.com/docs.html` |
+| **Agent Integration Guide** | `https://collar-b46l.onrender.com/agent-docs.html` |
 | **MCP Server Card** | `https://backendai-x4m1.onrender.com/.well-known/mcp/server-card.json` |
 
 ---
