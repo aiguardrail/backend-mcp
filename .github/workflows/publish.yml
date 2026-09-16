@@ -18,7 +18,23 @@ jobs:
 
       - name: Install mcp-publisher
         run: |
-          curl -L "https://github.com/modelcontextprotocol/registry/releases/download/v1.7.6/mcp-publisher_1.7.6_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+          set -e
+          OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+          ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+          VERSION="v1.7.6"
+          FILENAME="mcp-publisher_${VERSION#v}_${OS}_${ARCH}.tar.gz"
+          URL="https://github.com/modelcontextprotocol/registry/releases/download/${VERSION}/${FILENAME}"
+          
+          echo "Downloading from: $URL"
+          curl -fL "$URL" -o "$FILENAME"
+          
+          if [ ! -s "$FILENAME" ]; then
+            echo "Error: Downloaded file is empty. The URL may be incorrect."
+            exit 1
+          fi
+          
+          tar xzf "$FILENAME" mcp-publisher
+          rm "$FILENAME"
 
       - name: Sync version from tag
         if: startsWith(github.ref, 'refs/tags/v')
