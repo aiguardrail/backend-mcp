@@ -22,19 +22,20 @@ jobs:
           OS=$(uname -s | tr '[:upper:]' '[:lower:]')
           ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
           VERSION="v1.7.6"
-          FILENAME="mcp-publisher_${VERSION#v}_${OS}_${ARCH}.tar.gz"
-          URL="https://github.com/modelcontextprotocol/registry/releases/download/${VERSION}/${FILENAME}"
           
-          echo "Downloading from: $URL"
-          curl -fL "$URL" -o "$FILENAME"
+          ASSET_URL=$(curl -fsSL "https://api.github.com/repos/modelcontextprotocol/registry/releases/tags/${VERSION}" \
+            | jq -r ".assets[] | select(.name | test(\"mcp-publisher.*${ARCH}.*tar\\\\.gz\")) | .browser_download_url" \
+            | head -n 1)
           
-          if [ ! -s "$FILENAME" ]; then
-            echo "Error: Downloaded file is empty. The URL may be incorrect."
+          if [ -z "$ASSET_URL" ]; then
+            echo "Error: Could not find a matching asset for ${ARCH} in ${VERSION}"
             exit 1
           fi
           
-          tar xzf "$FILENAME" mcp-publisher
-          rm "$FILENAME"
+          echo "Downloading from: $ASSET_URL"
+          curl -fL "$ASSET_URL" -o "mcp-publisher.tar.gz"
+          tar xzf "mcp-publisher.tar.gz" mcp-publisher
+          rm "mcp-publisher.tar.gz"
 
       - name: Sync version from tag
         if: startsWith(github.ref, 'refs/tags/v')
