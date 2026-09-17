@@ -150,7 +150,6 @@ No signup, no API key. Registered in the x402 Bazaar for automatic agent discove
 
 - **Live Terminal (UI):** https://collar-b46l.onrender.com
 - **Agent Integration Guide:** https://collar-b46l.onrender.com/agent-docs.html
-- **API Reference:** https://collar-b46l.onrender.com/docs.html
 - **MCP Server Card:** https://backendai-x4m1.onrender.com/.well-known/mcp/server-card.json
 
 ## Contact
