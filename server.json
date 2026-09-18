@@ -2,12 +2,12 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.aiguardrail/backend",
   "description": "Deterministic pre-trade risk checks for autonomous AI trading agents.",
-  "version": "1.0.3",
-  "homepage": "https://collar-b46l.onrender.com",
+  "version": "1.0.4",
+  "homepage": "https://collarguardrail.com",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://backendai-x4m1.onrender.com/mcp-http/mcp"
+      "url": "https://api.collarguardrail.com/mcp-http/mcp"
     }
   ]
 }
