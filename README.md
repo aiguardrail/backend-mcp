@@ -20,12 +20,12 @@ The result is a single, auditable verdict — never a probabilistic guess.
 
 ## Endpoints
 
-- **MCP Server:** `https://backendai-x4m1.onrender.com/mcp-http/mcp`
-- **MCP Server Card:** `https://backendai-x4m1.onrender.com/.well-known/mcp/server-card.json`
-- **Agent Card (A2A):** `https://backendai-x4m1.onrender.com/.well-known/agent-card.json`
-- **x402 Discovery:** `https://backendai-x4m1.onrender.com/.well-known/x402.json`
-- **llms.txt:** `https://backendai-x4m1.onrender.com/llms.txt`
-- **Live Terminal (UI):** `https://collar-b46l.onrender.com`
+- **MCP Server:** `https://api.collarguardrail.com/mcp-http/mcp`
+- **MCP Server Card:** `https://api.collarguardrail.com/.well-known/mcp/server-card.json`
+- **Agent Card (A2A):** `https://api.collarguardrail.com/.well-known/agent-card.json`
+- **x402 Discovery:** `https://api.collarguardrail.com/.well-known/x402.json`
+- **llms.txt:** `https://api.collarguardrail.com/llms.txt`
+- **Live Terminal (UI):** `https://collarguardrail.com`
 
 MCP Transport: `streamable-http` | Protocol: `2025-06-18` | Auth: none (fixed Tier 1)
 
@@ -37,7 +37,7 @@ Add to your MCP client config (Claude Desktop, Cursor, VS Code):
 {
   "mcpServers": {
     "collar-guardrail": {
-      "url": "https://backendai-x4m1.onrender.com/mcp-http/mcp"
+      "url": "https://api.collarguardrail.com/mcp-http/mcp"
     }
   }
 }
@@ -46,7 +46,7 @@ Add to your MCP client config (Claude Desktop, Cursor, VS Code):
 Verify:
 
 ```bash
-curl -X POST https://backendai-x4m1.onrender.com/mcp-http/mcp \
+curl -X POST https://api.collarguardrail.com/mcp-http/mcp \
   -H "Content-Type: application/json" \
   -H "Accept: application/json, text/event-stream" \
   -d '{"jsonrpc":"2.0","method":"tools/list","id":1}'
@@ -154,9 +154,9 @@ No signup, no API key. Registered in the x402 Bazaar for automatic agent discove
 
 ## Documentation
 
-- **Live Terminal (UI):** https://collar-b46l.onrender.com
-- **Agent Integration Guide:** https://collar-b46l.onrender.com/agent-docs.html
-- **MCP Server Card:** https://backendai-x4m1.onrender.com/.well-known/mcp/server-card.json
+- **Live Terminal (UI):** https://collarguardrail.com
+- **Agent Integration Guide:** https://collarguardrail.com/agent-docs.html
+- **MCP Server Card:** https://api.collarguardrail.com/.well-known/mcp/server-card.json
 
 ## Contact
 
