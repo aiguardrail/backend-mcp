@@ -56,8 +56,8 @@ curl -X POST https://backendai-x4m1.onrender.com/mcp-http/mcp \
 
 | Tool | Purpose |
 | :--- | :--- |
-| `evaluate_trade` | Pre-trade risk check — returns allow / warn / deny with reasons and audit hash |
-| `check_token_safety` | Honeypot / contract safety check for any ERC-20 |
+| `evaluate_trade` | Pre-trade risk check — returns allow / warn / deny with reasons and audit hash. **Honeypot findings (severity=danger) force a DENY.** |
+| `check_token_safety` | Honeypot / contract safety check for any ERC-20. **When severity=danger, evaluate_trade auto-DENYs.** |
 | `simulate_balance` | Read-only balance simulation via `eth_call` state override |
 | `get_supported_assets` | Official Robinhood Chain asset registry |
 | `verify_audit_trail` | Verify the hash-chain integrity of past decisions |
@@ -88,6 +88,12 @@ curl -X POST https://backendai-x4m1.onrender.com/mcp-http/mcp \
 
 **Contract Safety**
 - Honeypot detection: bytecode scan, owner check, sell simulation via `eth_call`
+- **Auto-DENY:** when severity=danger, the verdict is `deny` regardless of
+  other checks — a hard stop.
+- GoPlus intelligence for unregistered tokens (buy/sell tax, mintable,
+  proxy, ownership reclaim).
+- Excessive tax (buy or sell > 10%) triggers an automatic `deny` via
+  GoPlus when `allow_unregistered=true` is passed to the request.
 
 **Auth & Infrastructure**
 - JWT authentication via EIP-191 wallet signature (REST API)
