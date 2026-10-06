@@ -1,13 +1,54 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.aiguardrail/backend",
-  "description": "Deterministic pre-trade risk checks for autonomous AI trading agents.",
+  "description": "Deterministic pre-trade risk checks for autonomous AI trading agents on Robinhood Chain. Returns allow/warn/deny with reasons, a 0-100 risk score, and a tamper-evident SHA-256 audit hash. 6 tools: evaluate_trade, evaluate_trade_paid, check_token_safety, simulate_balance, get_supported_assets, verify_audit_trail.",
   "version": "1.0.4",
   "homepage": "https://collarguardrail.com",
+  "repository": {
+    "url": "https://github.com/aiguardrail/backend-mcp",
+    "source": "github"
+  },
+  "license": "MIT",
+  "keywords": [
+    "risk",
+    "guardrail",
+    "trading",
+    "agents",
+    "mcp",
+    "robinhood-chain",
+    "x402",
+    "defi"
+  ],
   "remotes": [
     {
       "type": "streamable-http",
       "url": "https://api.collarguardrail.com/mcp-http/mcp"
+    }
+  ],
+  "tools": [
+    {
+      "name": "evaluate_trade",
+      "description": "Pre-trade risk check at fixed Tier 1 ($5,000 ceiling). Returns allow/warn/deny with reasons and a tamper-evident audit hash. Honeypot findings (severity=danger) force a DENY."
+    },
+    {
+      "name": "evaluate_trade_paid",
+      "description": "Same as evaluate_trade but gated by an x402 payment. Evaluated as Tier 2 ($25,000 ceiling). Call without payment_proof to receive the challenge; settle on-chain; retry with the proof."
+    },
+    {
+      "name": "check_token_safety",
+      "description": "Honeypot / contract safety check for any ERC-20. When severity=danger, evaluate_trade auto-DENYs the trade."
+    },
+    {
+      "name": "simulate_balance",
+      "description": "Read-only state-override simulation of an ERC-20 balance after a hypothetical trade. No transaction is sent."
+    },
+    {
+      "name": "get_supported_assets",
+      "description": "Official Robinhood Chain asset registry with canonical contract addresses."
+    },
+    {
+      "name": "verify_audit_trail",
+      "description": "Recompute every past decision's SHA-256 hash and verify the hash-chain links. Proves no decision was edited, deleted, or reordered."
     }
   ]
 }
