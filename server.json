@@ -3,7 +3,7 @@
   "name": "io.github.aiguardrail/backend",
   "title": "Collar Guardrail — Pre-Trade Risk Layer",
   "description": "Deterministic pre-trade risk checks for AI agents on Robinhood Chain. Returns allow/warn/deny.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "websiteUrl": "https://collarguardrail.com",
   "repository": {
     "url": "https://github.com/aiguardrail/backend-mcp",
